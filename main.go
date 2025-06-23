@@ -19,6 +19,26 @@ var allEffectsForRandom = []string{
 }
 
 func main() {
+	/*
+	 * Ensure our current directory is our executable's directory
+	 */
+	execPath, err := os.Executable()
+
+	if err != nil {
+		log.Fatalf("Failed to get executable path: %v", err)
+	}
+
+	execDir := filepath.Dir(execPath)
+
+	err = os.Chdir(execDir)
+
+	if err != nil {
+		log.Fatalf("Failed to change directory to %s: %v", execDir, err)
+	}
+
+	/*
+	 * Load our configuration and get a list of image paths
+	 */
 	config := LoadConfig()
 	imagePaths := getImagePaths()
 
@@ -30,6 +50,9 @@ func main() {
 		config.SpeedInSeconds = 5
 	}
 
+	/*
+	 * Configurare and run the slideshow
+	 */
 	config.ScreenWidth, config.ScreenHeight = ebiten.Monitor().Size()
 	ebiten.SetWindowSize(config.ScreenWidth, config.ScreenHeight)
 	ebiten.SetWindowTitle("Slide Shower")
