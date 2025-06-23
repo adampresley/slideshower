@@ -1,0 +1,40 @@
+// bubble_melt.kage
+package main
+
+var Progress float
+var Resolution vec2
+var Bubbles [100]vec3 // vec3(x, y, radius)
+
+func Fragment(position vec4, texCoord vec2, color vec4) vec4 {
+	pixel := texCoord * Resolution
+	inBubble := false
+
+	for i := 0; i < 100; i++ {
+		b := Bubbles[i]
+		if b.z <= 0.0 {
+			continue
+		}
+		dx := pixel.x - b.x
+		dy := pixel.y - b.y
+		dist := sqrt(dx * dx + dy * dy)
+		if dist < b.z {
+			inBubble = true
+			break
+		}
+	}
+
+	if Progress < 0.5 {
+		// Erase current image with black bubbles
+		if inBubble {
+			return vec4(0, 0, 0, 1)
+		}
+		return imageSrc0At(texCoord)
+	} else {
+		// Reveal next image with bubbles
+		if inBubble {
+			return imageSrc1At(texCoord)
+		}
+		return vec4(0, 0, 0, 1)
+	}
+}
+
