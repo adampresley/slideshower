@@ -65,11 +65,3 @@ effect: "random"
 Save the config.yml file and run the application. It will automatically use the specified settings.
 Enjoy your slideshow!
 
-This README provides clear instructions on how to compile the application, run it with default settings, and customize its behavior using the `config.yml` file. It covers all the main points you requested, including:
-
-1. How to compile the app using Go
-2. How to run the app by copying the executable to a folder with images
-3. The default settings (5-second display, windowed mode, crossfade effect)
-4. How to create and use a `config.yml` file to configure the options
-
-You can save this content as `README.md` in your project's root directory. Feel free to adjust any details or add more information as needed.
