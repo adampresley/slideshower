@@ -20,7 +20,13 @@ func LoadConfig() *Config {
 	b, err := os.ReadFile("./config.yml")
 
 	if err != nil {
-		log.Fatalf("Error reading config file: %v", err)
+		return &Config{
+			Fullscreen:     false,
+			ScreenWidth:    0,
+			ScreenHeight:   0,
+			SpeedInSeconds: 5,
+			Effect:         "crossfade",
+		}
 	}
 
 	err = yaml.Unmarshal(b, &result)
