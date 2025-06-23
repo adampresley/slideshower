@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"path/filepath"
@@ -74,7 +75,11 @@ func main() {
 	}
 
 	if err := ebiten.RunGame(app); err != nil {
-		log.Fatalf("failed to run game: %v", err)
+		if errors.Is(err, ErrUserQuit) {
+			log.Println("application closed successfully")
+		} else {
+			log.Fatalf("failed to run application: %v", err)
+		}
 	}
 }
 

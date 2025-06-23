@@ -1,16 +1,29 @@
 package main
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"errors"
+
+	"github.com/hajimehoshi/ebiten/v2"
+)
+
+var (
+	ErrUserQuit = errors.New("user quit")
+)
 
 type App struct {
 	ScreenWidth  int
 	ScreenHeight int
 	Slideshow    *Slideshow
+	shouldQuit   bool
 }
 
 func (a *App) Update() error {
-	_ = a.Slideshow.Update()
-	return nil
+	if ebiten.IsKeyPressed(ebiten.KeyEscape) || ebiten.IsKeyPressed(ebiten.KeyQ) {
+		a.shouldQuit = true
+		return ErrUserQuit
+	}
+
+	return a.Slideshow.Update()
 }
 
 func (a *App) Draw(screen *ebiten.Image) {

@@ -18,7 +18,8 @@ This will create an executable named `slideshower` (or `slideshower.exe` on Wind
 To run Slideshower:
 
 1. Copy the `slideshower` executable to a directory containing the images you want to display in the slideshow.
-3. Run the application by double-clicking on it
+2. Run the application by double-clicking on it
+3. To quit, either press `ESC` or `q` to quit.
 
 By default, the application will:
 
